@@ -1,0 +1,25 @@
+-- -*- lua -*-
+help(
+[[
+Anaconda Python distribution
+]])
+
+-- comments are prefaced with two dashes
+
+whatis("Description: Anaconda")
+whatis("URL: continuum.io/anaconda")
+
+local install_path = "{{ install_dir }}/anaconda"
+
+-- set an environment variable
+setenv("ANACONDA_HOME",install_path)
+
+-- add to PATH variable
+prepend_path('PATH', pathJoin(install_path,"bin"))
+
+-- add Library Paths
+prepend_path('LD_LIBRARY_PATH',pathJoin(install_path,"lib"))
+prepend_path('LIBRARY_PATH',pathJoin(install_path,"lib"))
+
+-- add include paths
+prepend_path('INCLUDE',pathJoin(install_path,"include"))

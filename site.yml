@@ -1,0 +1,8 @@
+---
+# Main HPCC software deployment playbook
+
+- hosts: hpcc
+  user: irberlui
+  roles:
+     - role: parallel
+     - role: anaconda
