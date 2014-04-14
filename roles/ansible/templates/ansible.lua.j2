@@ -16,7 +16,7 @@ local install_path = "{{ install_dir}}/ansible"
 -- set an environment variable
 setenv("ANSIBLE_HOME",install_path)
 
-setenv("DEFAULT_MODULE_PATH", pathJoin(install_path, "library"))
+setenv("ANSIBLE_LIBRARY", pathJoin(install_path, "library"))
 
 prepend_path("PYTHONPATH", pathJoin(install_path, "lib"))
 

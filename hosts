@@ -1,2 +1,2 @@
 [hpcc]
-hpcc
+localhost ansible_connection=local
