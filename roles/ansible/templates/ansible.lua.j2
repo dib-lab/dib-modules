@@ -1,0 +1,26 @@
+-- -*- lua -*-
+help(
+[[
+Ansible
+]])
+
+-- comments are prefaced with two dashes
+
+whatis("Description: Ansible")
+whatis("URL: http://www.ansible.com")
+
+prereq('anaconda')
+
+local install_path = "{{ install_dir}}/ansible"
+
+-- set an environment variable
+setenv("ANSIBLE_HOME",install_path)
+
+setenv("DEFAULT_MODULE_PATH", pathJoin(install_path, "library"))
+
+prepend_path("PYTHONPATH", pathJoin(install_path, "lib"))
+
+-- add to PATH variable
+prepend_path('PATH', pathJoin(install_path,"bin"))
+
+prepend_path('MANPATH', pathJoin(install_path,"docs","man"))
