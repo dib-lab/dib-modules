@@ -4,5 +4,7 @@
 - hosts: hpcc
   user: irberlui
   roles:
+     - role: ansible
      - role: parallel
      - role: anaconda
+     - role: htop

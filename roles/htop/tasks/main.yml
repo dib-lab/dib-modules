@@ -1,0 +1,27 @@
+---
+
+- name: create tmp download dir
+  file: path=~/tmp state=directory
+
+- name: download installer
+  get_url: url=http://hisham.hm/htop/releases/1.0.2/htop-1.0.2.tar.gz
+           dest=~/tmp/htop-1.0.2.tar.gz
+           sha256sum=ee60657b044ece0df096c053060df7abf3cce3a568ab34d260049e6a37ccd8a1
+
+- name: extract package
+  command: chdir=~/tmp/ tar -xf htop-1.0.2.tar.gz
+           creates=~/tmp/htop-1.0.2
+
+#- name: configure installation
+#  command: chdir=~/tmp/htop-1.0.2 ./configure --prefix={{ install_dir }}/htop
+#           creates=~/tmp/parallel-20140322/Makefile
+
+#- name: install
+#  command: chdir=~/tmp/htop-1.0.2 make install
+#           creates={{ install_dir }}/htop
+
+- name: ensure modulefiles dir exists
+  file: path={{ install_dir}}/modulefiles state=directory
+
+- name: Configure modulefile
+  template: src=htop.lua.j2 dest={{ install_dir}}/modulefiles/htop.lua
