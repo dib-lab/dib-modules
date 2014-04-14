@@ -1,0 +1,32 @@
+---
+
+- name: create tmp download dir
+  file: path=~/tmp state=directory
+
+- name: download installer
+  get_url: url=http://jonas.nitro.dk/tig/releases/tig-1.2.tar.gz
+           dest=~/tmp/tig-1.2.tar.gz
+           sha256sum=9bf8a8b83761634d8431cb38ef5a133371a5e09460750706e6de3813f06242a4
+
+- name: extract package
+  command: chdir=~/tmp/ tar -xf tig-1.2.tar.gz
+           creates=~/tmp/tig-1.2
+
+- name: configure installation
+  command: chdir=~/tmp/tig-1.2 ./configure --prefix={{ install_dir }}/tig
+#           creates=~/tmp/parallel-20140322/Makefile
+
+- name: install
+  command: chdir=~/tmp/tig-1.2 make install
+           creates={{ install_dir }}/tig/bin
+
+- name: install docs
+  command: chdir=~/tmp/tig-1.2 make install-doc-man
+           creates={{ install_dir }}/tig/share
+
+
+- name: ensure modulefiles dir exists
+  file: path={{ install_dir}}/modulefiles state=directory
+
+- name: Configure modulefile
+  template: src=tig.lua.j2 dest={{ install_dir}}/modulefiles/tig.lua

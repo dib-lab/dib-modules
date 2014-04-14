@@ -8,3 +8,4 @@
      - role: parallel
      - role: anaconda
      - role: htop
+     - role: tig

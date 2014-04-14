@@ -1,0 +1,18 @@
+-- -*- lua -*-
+help(
+[[
+tig
+]])
+
+-- comments are prefaced with two dashes
+
+whatis("Description: tig")
+whatis("URL: http://jonas.nitro.dk/tig/")
+
+local install_path = "{{ install_dir}}/tig"
+
+-- set an environment variable
+setenv("TIG_HOME",install_path)
+
+-- add to PATH variable
+prepend_path('PATH', pathJoin(install_path,"bin"))

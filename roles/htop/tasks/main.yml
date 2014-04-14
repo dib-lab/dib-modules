@@ -12,13 +12,13 @@
   command: chdir=~/tmp/ tar -xf htop-1.0.2.tar.gz
            creates=~/tmp/htop-1.0.2
 
-#- name: configure installation
-#  command: chdir=~/tmp/htop-1.0.2 ./configure --prefix={{ install_dir }}/htop
+- name: configure installation
+  command: chdir=~/tmp/htop-1.0.2 ./configure --prefix={{ install_dir }}/htop
 #           creates=~/tmp/parallel-20140322/Makefile
 
-#- name: install
-#  command: chdir=~/tmp/htop-1.0.2 make install
-#           creates={{ install_dir }}/htop
+- name: install
+  command: chdir=~/tmp/htop-1.0.2 make install
+           creates={{ install_dir }}/htop
 
 - name: ensure modulefiles dir exists
   file: path={{ install_dir}}/modulefiles state=directory
