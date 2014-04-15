@@ -39,7 +39,8 @@
   ```
 
   Edit site.yml (our playbook) to run anaconda and ansible roles
-  (comment the others).
+  (comment the others). Comment the hosts=local line and uncomment
+  the hosts=hpcc line.
 
   Run the playbook (and wait):
 
@@ -59,10 +60,15 @@
 
   ``` ini
   [hpcc]
-  localhost ansible_connection=localhost
+  hpcc.msu.edu
+
+  [local]
+  localhost ansible_connection=local
   ```
 
-  Uncomment the remaining roles in the playbook. Run the playbook (and wait):
+  Uncomment the remaining roles in the playbook.
+  Uncomment the hosts=local line and comment the hosts=hpcc line.
+  Run the playbook (and wait):
 
   ``` bash
   $ ansible-playbook -i hosts site.yml

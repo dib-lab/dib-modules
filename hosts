@@ -1,2 +1,5 @@
 [hpcc]
+hpcc.ged.msu
+
+[local]
 localhost ansible_connection=local

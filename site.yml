@@ -1,11 +1,12 @@
 ---
 # Main HPCC software deployment playbook
 
-- hosts: hpcc
-  user: irberlui
+- user: irberlui
+  #hosts: hpcc
+  hosts: local
   roles:
-     - role: anaconda
-     - role: ansible
+     #- role: anaconda
+     #- role: ansible
 
      - role: parallel
      - role: htop
