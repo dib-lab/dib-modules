@@ -1,0 +1,27 @@
+---
+
+- name: create tmp download dir
+  file: path=~/tmp state=directory
+
+- name: download installer
+  get_url: url=ftp://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2
+           dest=~/tmp/vim-7.4.tar.bz2
+           #sha256sum=b4690319856f9a4cbb73cdd498d358666412d1fbc8848f1e83edf4d5d62d69fe
+
+- name: extract package
+  command: chdir=~/tmp/ tar -xf vim-7.4.tar.bz2
+           creates=~/tmp/vim74
+
+- name: configure installation
+  command: chdir=~/tmp/vim74 ./configure --prefix={{ install_dir }}/vim --with-features=huge
+#           creates=~/tmp/parallel-20140322/Makefile
+
+- name: install
+  command: chdir=~/tmp/vim74 make install
+           creates={{ install_dir }}/vim
+
+- name: ensure modulefiles dir exists
+  file: path={{ install_dir }}/modulefiles state=directory
+
+- name: Configure modulefile
+  template: src=vim.lua.j2 dest={{ install_dir }}/modulefiles/vim.lua

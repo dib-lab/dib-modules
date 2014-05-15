@@ -1,0 +1,20 @@
+-- -*- lua -*-
+help(
+[[
+vim
+]])
+
+-- comments are prefaced with two dashes
+
+whatis("Description: vim")
+whatis("URL: http://www.vim.org")
+
+local install_path = "{{ install_dir }}/vim"
+
+-- set an environment variable
+setenv("VIM_HOME", install_path)
+
+-- add to PATH variable
+prepend_path('PATH', pathJoin(install_path,"bin"))
+
+prepend_path('MANPATH', pathJoin(install_path,"share","man"))

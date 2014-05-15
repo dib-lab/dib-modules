@@ -11,3 +11,4 @@
      - role: parallel
      - role: htop
      - role: tig
+     - role: vim
