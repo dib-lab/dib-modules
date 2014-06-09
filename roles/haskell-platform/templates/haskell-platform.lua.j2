@@ -1,0 +1,23 @@
+-- -*- lua -*-
+help(
+[[
+Haskell platform
+]])
+
+-- comments are prefaced with two dashes
+
+whatis("Description: Haskell Platform")
+whatis("URL: http://haskell.org/platform")
+
+local install_path = "{{ install_dir }}/haskell-platform"
+
+-- set an environment variable
+setenv("GHC_HASKELL_HOME", install_path)
+
+-- add to PATH variable
+prepend_path('PATH', pathJoin(install_path, "bin"))
+prepend_path('PATH', pathJoin("$HOME", ".cabal", "bin"))
+
+prepend_path('MANPATH', pathJoin(install_path, "share", "man"))
+prepend_path('LD_LIBRARY_PATH', pathJoin(install_path,"lib"))
+prepend_path('LIBRARY_PATH', pathJoin(install_path,"lib"))
