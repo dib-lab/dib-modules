@@ -1,0 +1,15 @@
+-- -*- lua -*-
+help(
+[[
+wgs-assembler
+]])
+
+-- comments are prefaced with two dashes
+
+whatis("Description: wgs-assembler")
+whatis("URL: http://sourceforge.net/projects/wgs-assembler/")
+
+local install_path = "{{ install_dir }}/wgs-assembler/Linux-amd64"
+
+-- add to PATH variable
+prepend_path('PATH', pathJoin(install_path,"bin"))
