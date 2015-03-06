@@ -1,0 +1,17 @@
+-- -*- lua -*-
+help(
+[[
+java
+]])
+
+-- comments are prefaced with two dashes
+
+whatis("Description: java JRE")
+whatis("URL: http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html")
+
+local install_path = "{{ install_dir }}/java/jre{{ java_version }}"
+
+-- add to PATH variable
+prepend_path('PATH', pathJoin(install_path, "bin"))
+prepend_path('JAVA_HOME', pathJoin(install_path))
+prepend_path('JAVA_FONTS', pathJoin(install_path, "lib", "fonts"))

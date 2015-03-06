@@ -1,0 +1,14 @@
+---
+
+- name: ensure module dir exists
+  file: path={{ install_dir }}/java/{{ java_version }} state=directory
+
+- name: install
+  unarchive: src=jre-8u31-linux-x64.tar.gz dest={{ install_dir }}/java/
+#             creates={{ install_dir }}/java/jre{{ java_version }}/bin/java
+
+- name: ensure modulefiles dir exists
+  file: path={{ install_dir }}/modulefiles/java state=directory
+
+- name: Configure modulefile
+  template: src=java.lua.j2 dest={{ install_dir }}/modulefiles/java/{{ java_version }}.lua

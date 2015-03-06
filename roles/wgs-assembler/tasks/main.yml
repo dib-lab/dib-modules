@@ -4,23 +4,23 @@
   file: path=~/tmp state=directory
 
 - name: download installer
-  get_url: url=http://downloads.sourceforge.net/project/wgs-assembler/wgs-assembler/wgs-8.2beta/wgs-8.2beta-Linux_amd64.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fwgs-assembler%2Ffiles%2Fwgs-assembler%2Fwgs-8.2beta%2F&ts=1414881338&use_mirror=softlayer-dal
-           dest=~/tmp/wgs-8.2beta-Linux_amd64.tar.bz2
-           sha256sum=1710fb6dd29a9a6b2405f0cb9eea40dc6d87f21492839f4bb98c85761e033196
+  get_url: url={{ wgs_download_url }}
+           dest=~/tmp/wgs-{{ wgs_version }}.tar.bz2
+           sha256sum={{ wgs_download_sha256 }}
 
 - name: extract package
-  command: chdir=~/tmp/ tar -xf wgs-8.2beta-Linux_amd64.tar.bz2
-           creates=~/tmp/wgs-8.2beta
+  command: chdir=~/tmp/ tar -xf wgs-{{ wgs_version }}.tar.bz2
+           creates=~/tmp/wgs-{{ wgs_version }}
 
 - name: ensure module dir exists
-  file: path={{ install_dir }}/wgs-assembler state=directory
+  file: path={{ install_dir }}/wgs-assembler/{{ wgs_version }} state=directory
 
 - name: install
-  command: chdir=~/tmp/wgs-8.2beta cp -a Linux-amd64/ {{ install_dir }}/wgs-assembler/
-           creates={{ install_dir }}/wgs-assembler/Linux-amd64/bin
+  command: chdir=~/tmp/wgs-{{ wgs_version }} cp -a Linux-amd64/ {{ install_dir }}/wgs-assembler/{{ wgs_version }}
+           creates={{ install_dir }}/wgs-assembler/{{ wgs_version }}/Linux-amd64/bin
 
 - name: ensure modulefiles dir exists
-  file: path={{ install_dir }}/modulefiles state=directory
+  file: path={{ install_dir }}/modulefiles/wgs-assembler state=directory
 
 - name: Configure modulefile
-  template: src=wgs-assembler.lua.j2 dest={{ install_dir }}/modulefiles/wgs-assembler.lua
+  template: src=wgs-assembler.lua.j2 dest={{ install_dir }}/modulefiles/wgs-assembler/{{ wgs_version }}.lua

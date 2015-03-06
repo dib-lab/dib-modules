@@ -1,0 +1,7 @@
+#- wgs_version: 8.2
+#- wgs_download_url: http://downloads.sourceforge.net/project/wgs-assembler/wgs-assembler/wgs-8.2/wgs-8.2-Linux_amd64.tar.bz2
+#- wgs_download_sha256: 48acb30cde1cc47aaf6ca8db518146d784e3c8e5869fba4268ba78967112513c
+
+wgs_version: 8.3rc1
+wgs_download_url: http://downloads.sourceforge.net/project/wgs-assembler/wgs-assembler/wgs-8.3/wgs-8.3rc1-Linux_amd64.tar.bz2
+wgs_download_sha256: 124a982c08266b0853ba5f511802838274073e3a5446b5b66538ee5094971951

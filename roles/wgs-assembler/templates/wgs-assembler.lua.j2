@@ -9,7 +9,9 @@ wgs-assembler
 whatis("Description: wgs-assembler")
 whatis("URL: http://sourceforge.net/projects/wgs-assembler/")
 
-local install_path = "{{ install_dir }}/wgs-assembler/Linux-amd64"
+local install_path = "{{ install_dir }}/wgs-assembler/{{ wgs_version }}/Linux-amd64"
 
 -- add to PATH variable
 prepend_path('PATH', pathJoin(install_path,"bin"))
+prepend_path('LIBRARY_PATH', pathJoin(install_path,"lib"))
+prepend_path('LD_LIBRARY_PATH', pathJoin(install_path,"lib"))
