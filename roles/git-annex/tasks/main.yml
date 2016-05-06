@@ -1,0 +1,50 @@
+---
+
+- name: create tmp download dir
+  file: path=~/tmp state=directory
+
+- name: download installer
+  get_url: url=https://downloads.kitenet.net/git-annex/linux/current/git-annex-standalone-amd64.tar.gz
+           dest=~/tmp/git-annex-standalone-amd64.tar.gz
+           #sha256sum=b4690319856f9a4cbb73cdd498d358666412d1fbc8848f1e83edf4d5d62d69fe
+
+- name: extract package
+  command: chdir=~/tmp/ tar -xf git-annex-standalone-amd64.tar.gz
+           creates=~/tmp/git-annex.linux/
+
+- name: ensure module dir exists
+  file: path={{ install_dir }}/git-annex state=directory
+
+- name: install
+  command: chdir=~/tmp/git-annex.linux cp -a . {{ install_dir }}/git-annex/
+           creates={{ install_dir }}/git-annex/git-annex
+
+#- name: remove binary files available on HPCC
+#  file: path={{ install_dir }}/git-annex/bin/{{ item }} state=absent
+#  with_items:
+#    - cp
+#    - curl
+#    - gpg
+#    - lsof
+#    - rsync
+#    - sh
+#    - sha1sum
+#    - sha224sum
+#    - sha256sum
+#    - sha384sum
+#    - sha512sum
+#    - ssh
+#    - wget
+#    - xargs
+#    - ssh-keygen
+#    - tar
+#    - git-shell
+#    - git-upload-pack
+#    - git-receive-pack
+#    - gunzip
+
+- name: ensure modulefiles dir exists
+  file: path={{ install_dir }}/modulefiles state=directory
+
+- name: Configure modulefile
+  template: src=git-annex.lua.j2 dest={{ install_dir }}/modulefiles/git-annex.lua

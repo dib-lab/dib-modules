@@ -1,0 +1,20 @@
+-- -*- lua -*-
+help(
+[[
+git annex
+]])
+
+-- comments are prefaced with two dashes
+
+whatis("Description: git annex")
+whatis("URL: https://git-annex.branchable.com/")
+
+local install_path = "{{ install_dir }}/git-annex"
+
+-- set an environment variable
+setenv("GIT_ANNEX_HOME",install_path)
+
+-- add to PATH variable
+prepend_path('PATH', install_path)
+
+prepend_path('MANPATH', pathJoin(install_path,"usr","share","man"))
