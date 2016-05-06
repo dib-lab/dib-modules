@@ -13,7 +13,7 @@
            creates=~/tmp/vim74
 
 - name: configure installation
-  command: chdir=~/tmp/vim74 ./configure --prefix={{ install_dir }}/vim --with-features=huge
+  command: chdir=~/tmp/vim74 ./configure --prefix={{ install_dir }}/vim --with-features=huge --enable-pythoninterp=dynamic --enable-python3interp=dynamic
 #           creates=~/tmp/parallel-20140322/Makefile
 
 - name: install
