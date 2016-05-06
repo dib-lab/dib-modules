@@ -1,0 +1,27 @@
+---
+
+- name: create tmp download dir
+  file: path=~/tmp state=directory
+
+- name: download installer
+  get_url: url=http://www.colordiff.org/colordiff-1.0.13.tar.gz
+           dest=~/tmp/colordiff-1.0.13.tar.gz
+           #sha256sum=b4690319856f9a4cbb73cdd498d358666412d1fbc8848f1e83edf4d5d62d69fe
+
+- name: extract package
+  command: chdir=~/tmp/ tar -xf colordiff-1.0.13.tar.gz
+           creates=~/tmp/colordiff-1.0.13
+
+#- name: configure installation
+#  command: chdir=~/tmp/parallel-20140322 ./configure --prefix={{ install_dir }}/parallel
+#           creates=~/tmp/parallel-20140322/Makefile
+
+#- name: install
+#  command: chdir=~/tmp/parallel-20140322 make install
+#           creates={{ install_dir }}/parallel
+
+- name: ensure modulefiles dir exists
+  file: path={{ install_dir}}/modulefiles state=directory
+
+#- name: Configure modulefile
+#  template: src=parallel.lua.j2 dest={{ install_dir}}/modulefiles/parallel.lua
