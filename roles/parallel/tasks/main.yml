@@ -4,20 +4,20 @@
   file: path=~/tmp state=directory
 
 - name: download installer
-  get_url: url=http://ftp.kaist.ac.kr/gnu/gnu/parallel/parallel-20140322.tar.bz2
-           dest=~/tmp/parallel-20140322.tar.bz2
-           sha256sum=b4690319856f9a4cbb73cdd498d358666412d1fbc8848f1e83edf4d5d62d69fe
+  get_url: url=http://ftp.kaist.ac.kr/gnu/gnu/parallel/parallel-20160422.tar.bz2
+           dest=~/tmp/parallel-20160422.tar.bz2
+           sha256sum=065a8f471266361218a9eb45c5f8ab995d73b181cc1180600ee08cc768c9ac42
 
 - name: extract package
-  command: chdir=~/tmp/ tar -xf parallel-20140322.tar.bz2
-           creates=~/tmp/parallel-20140322
+  command: chdir=~/tmp/ tar -xf parallel-20160422.tar.bz2
+           creates=~/tmp/parallel-20160422
 
 - name: configure installation
-  command: chdir=~/tmp/parallel-20140322 ./configure --prefix={{ install_dir }}/parallel
+  command: chdir=~/tmp/parallel-20160422 ./configure --prefix={{ install_dir }}/parallel
 #           creates=~/tmp/parallel-20140322/Makefile
 
 - name: install
-  command: chdir=~/tmp/parallel-20140322 make install
+  command: chdir=~/tmp/parallel-20160422 make install
            creates={{ install_dir }}/parallel
 
 - name: ensure modulefiles dir exists
