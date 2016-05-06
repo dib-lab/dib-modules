@@ -3,27 +3,6 @@
 - name: create tmp download dir
   file: path=~/tmp state=directory
 
-- name: download ghc source
-  get_url: url=http://www.haskell.org/ghc/dist/7.6.3/ghc-7.6.3-src.tar.bz2
-           dest=~/tmp/ghc-7.6.3-src-tar.bz2
-           #sha256sum=b4690319856f9a4cbb73cdd498d358666412d1fbc8848f1e83edf4d5d62d69fe
-
-- name: extract ghc source
-  command: chdir=~/tmp/ tar -xf ghc-7.6.3-src.tar.bz2
-           creates=~/tmp/ghc-7.6.3
-
-- name: prepare ghc installation
-  command: chdir=~/tmp/ghc-7.6.3 perl boot
-#           creates=~/tmp/parallel-20140322/Makefile
-
-- name: configure ghc installation
-  command: chdir=~/tmp/ghc-7.6.3 ./configure --prefix={{ install_dir }}/haskell-platform
-#           creates=~/tmp/parallel-20140322/Makefile
-
-- name: install ghc
-  command: chdir=~/tmp/ghc-7.6.3 make install
-           creates={{ install_dir }}/haskell-platform
-
 - name: download freeglut source
   get_url: url=http://downloads.sourceforge.net/project/freeglut/freeglut/2.8.1/freeglut-2.8.1.tar.gz
            dest=~/tmp/freeglut-2.8.1.tar.gz
@@ -51,7 +30,7 @@
            creates=~/tmp/haskell-platform-2013.2.0.0
 
 - name: configure installation
-  command: chdir=~/tmp/haskell-platform-2013.2.0.0 ./configure --prefix={{ install_dir }}/haskell-platform --with-ghc={{ install_dir }}/haskell-platform/bin/ghc --with-ghc-pkg={{ install_dir }}/haskell-platform/bin/ghc-pkg
+  command: chdir=~/tmp/haskell-platform-2013.2.0.0 ./configure --prefix={{ install_dir }}/haskell-platform --with-ghc={{ install_dir }}/ghc/bin/ghc --with-ghc-pkg={{ install_dir }}/ghc/bin/ghc-pkg
   environment:
     CPPFLAGS: "-I /opt/software/ged-software/haskell-platform/include"
 #           creates=~/tmp/parallel-20140322/Makefile
@@ -61,7 +40,7 @@
            creates={{ install_dir }}/haskell-platform
 
 - name: ensure modulefiles dir exists
-  file: path={{ install_dir}}/modulefiles state=directory
+  file: path={{ install_dir }}/modulefiles state=directory
 
 - name: Configure modulefile
-  template: src=haskell-platform.lua.j2 dest={{ install_dir}}/modulefiles/haskell-platform.lua
+  template: src=haskell-platform.lua.j2 dest={{ install_dir }}/modulefiles/haskell-platform.lua
