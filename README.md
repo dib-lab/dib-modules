@@ -1,4 +1,4 @@
-# GED modules
+# DIB modules
 
   Ansible playbook containing some useful modules for MSU HPCC
 
