@@ -1,0 +1,23 @@
+---
+
+- name: ensure module dir exists
+  file: path={{ install_dir }}/lordec/{{ version }} state=directory
+
+- name: download installer
+  get_url: url={{ download_url }}
+           dest=~/tmp/lordec.tar.gz
+           #sha256sum={{ sha256sum }}
+
+- name: extract package
+  command: chdir=~/tmp/ tar -xf lordec.tar.gz
+           creates=~/tmp/LoRDEC-{{ version }}-Linux/
+
+- name: copy to the install dir
+  command: cp -a ~/tmp/LoRDEC-{{ version }}-Linux/bin {{ install_dir }}/lordec/{{ version }}/bin
+           creates={{ install_dir }}/lordec/{{ version }}/bin
+
+- name: ensure modulefiles dir exists
+  file: path={{ install_dir }}/modulefiles/lordec state=directory
+
+- name: Configure modulefile
+  template: src=lordec.lua.j2 dest={{ install_dir }}/modulefiles/lordec/{{ version }}.lua

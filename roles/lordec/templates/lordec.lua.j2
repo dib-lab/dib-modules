@@ -1,0 +1,16 @@
+-- -*- lua -*-
+help(
+[[
+java
+]])
+
+-- comments are prefaced with two dashes
+
+whatis("Description: LoRDEC")
+whatis("URL: http://gatb-tools.gforge.inria.fr/versions/src/LoRDEC-0.5.3-Source.tar.gz")
+
+local install_path = "{{ install_dir }}/lordec/{{ version }}"
+
+-- add to PATH variable
+prepend_path('PATH', pathJoin(install_path, "bin"))
+prepend_path('LORDEC_HOME', pathJoin(install_path))
