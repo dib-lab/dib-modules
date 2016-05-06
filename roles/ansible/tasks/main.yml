@@ -4,16 +4,16 @@
   file: path=~/tmp state=directory
 
 - name: download installer
-  get_url: url=http://releases.ansible.com/ansible/ansible-1.5.4.tar.gz
-           dest=~/tmp/ansible-1.5.4.tar.gz
-           #sha256sum=b4690319856f9a4cbb73cdd498d358666412d1fbc8848f1e83edf4d5d62d69fe
+  get_url: url=https://releases.ansible.com/ansible/ansible-1.9.4.tar.gz
+           dest=~/tmp/ansible-1.9.4.tar.gz
+           #sha256sum={{ sha256sum }}
 
 - name: extract package
-  command: chdir=~/tmp/ tar -xf ansible-1.5.4.tar.gz
-           creates=~/tmp/ansible-1.5.4
+  command: chdir=~/tmp/ tar -xf ansible-1.9.4.tar.gz
+           creates=~/tmp/ansible-1.9.4
 
 - name: copy to the install dir
-  command: cp -r ~/tmp/ansible-1.5.4 {{ install_dir }}/ansible
+  command: cp -r ~/tmp/ansible-1.9.4 {{ install_dir }}/ansible
            creates={{ install_dir }}/ansible
 
 #  command: chdir=~/tmp/ansible-1.5.4./configure --prefix={{ install_dir }}/parallel
