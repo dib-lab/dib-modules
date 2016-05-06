@@ -1,0 +1,20 @@
+-- -*- lua -*-
+help(
+[[
+Google Perftools
+]])
+
+-- comments are prefaced with two dashes
+
+whatis("Description: Google Perftools")
+whatis("URL: http://code.google.com/p/gperftools/")
+
+local install_path = "{{ install_dir }}/gperftools"
+
+-- set an environment variable
+setenv("GNU_GPERFTOOLS_HOME",install_path)
+
+-- add to PATH variable
+prepend_path('PATH', pathJoin(install_path,"bin"))
+
+prepend_path('MANPATH', pathJoin(install_path,"share","man"))

@@ -1,0 +1,27 @@
+---
+
+- name: create tmp download dir
+  file: path=~/tmp state=directory
+
+- name: download installer
+  get_url: url=https://googledrive.com/host/0B6NtGsLhIcf7MWxMMF9JdTN3UVk/gperftools-2.2.tar.gz
+           dest=~/tmp/gperftools-2.2.tar.gz
+           sha256sum=2407799467db2753a4a70c00dbb1b8429e23998427df31ee96361d2115cd63a4
+
+- name: extract package
+  command: chdir=~/tmp/ tar -xf gperftools-2.2.tar.gz
+           creates=~/tmp/gperftools-2.2
+
+- name: configure installation
+  command: chdir=~/tmp/gperftools-2.2 ./configure --prefix={{ install_dir }}/gperftools --enable-frame-pointers
+#           creates=~/tmp/parallel-20140322/Makefile
+
+- name: install
+  command: chdir=~/tmp/gperftools-2.2 make install
+           creates={{ install_dir }}/gperftools
+
+- name: ensure modulefiles dir exists
+  file: path={{ install_dir}}/modulefiles state=directory
+
+- name: Configure modulefile
+  template: src=gperftools.lua.j2 dest={{ install_dir}}/modulefiles/gperftools.lua
